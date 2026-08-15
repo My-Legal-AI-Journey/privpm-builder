@@ -1,0 +1,13 @@
+# Keep Vercel uploads small (demo does not need local PDF attachments)
+参考文献
+node_modules
+.next
+out
+.git
+*.pdf
+*.rar
+*.doc
+*.docx
+.env
+.env.*
+!.env.example

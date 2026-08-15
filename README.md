@@ -9,7 +9,8 @@
 
 | 类型 | URL |
 |------|-----|
-| Demo | https://my-legal-ai-journey.github.io/privpm-builder/ |
+| Demo（Vercel） | https://privpm-builder.vercel.app |
+| Demo（GitHub Pages） | https://my-legal-ai-journey.github.io/privpm-builder/ |
 | GitHub | https://github.com/My-Legal-AI-Journey/privpm-builder |
 | StepFun 申请文案 | [`docs/stepfun-application.draft.md`](docs/stepfun-application.draft.md) |
 

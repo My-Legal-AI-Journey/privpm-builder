@@ -2,7 +2,8 @@
 
 提交页：https://platform.stepfun.com/builder-program  
 仓库：https://github.com/My-Legal-AI-Journey/privpm-builder  
-Demo：https://my-legal-ai-journey.github.io/privpm-builder/
+Demo（推荐）：https://privpm-builder.vercel.app  
+备用 Demo（GitHub Pages）：https://my-legal-ai-journey.github.io/privpm-builder/
 
 > 带【待填】的项请提交前自行补齐，勿编造。
 
@@ -77,7 +78,8 @@ PrivPM 做轻量 Web Demo：引导输入「功能 + 数据用途 + 法域」，�
 ## GITHUB / DEMO / 仓库 / 链接
 
 - GitHub：https://github.com/My-Legal-AI-Journey/privpm-builder  
-- Demo：https://my-legal-ai-journey.github.io/privpm-builder/  
+- Demo：https://privpm-builder.vercel.app  
+- 备用：https://my-legal-ai-journey.github.io/privpm-builder/  
 - 申请文案：仓库内 `docs/stepfun-application.draft.md`
 
 ## 其他想告诉我们的
