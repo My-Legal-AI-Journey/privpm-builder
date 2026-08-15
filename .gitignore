@@ -17,3 +17,5 @@ Thumbs.db
 参考文献/**/*.zip
 *.pdf
 *.rar
+.vercel
+.env*

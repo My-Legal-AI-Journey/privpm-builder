@@ -1,13 +1,25 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { generatePrivPM } from "@/lib/generate";
+import { normalizeInputBrief } from "@/lib/normalize";
 
-const bodySchema = z.object({
-  feature: z.string().min(1),
-  purpose: z.string().min(1),
-  jurisdiction: z.enum(["CN", "EU", "CN+EU"]),
-  knownIssues: z.string().optional(),
-});
+const bodySchema = z
+  .object({
+    brief: z.string().optional(),
+    feature: z.string().optional(),
+    purpose: z.string().optional(),
+    knownIssues: z.string().optional(),
+    jurisdiction: z.enum(["CN", "EU", "CN+EU"]),
+  })
+  .transform((v) => {
+    const brief =
+      v.brief?.trim() ||
+      [v.feature, v.purpose && `目的：${v.purpose}`, v.knownIssues && `已知问题：${v.knownIssues}`]
+        .filter(Boolean)
+        .join("\n");
+    return { brief: normalizeInputBrief(brief || ""), jurisdiction: v.jurisdiction };
+  })
+  .refine((v) => v.brief.length > 0, { message: "brief_required" });
 
 export async function POST(req: Request) {
   try {

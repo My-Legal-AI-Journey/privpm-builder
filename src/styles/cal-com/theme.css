@@ -1,0 +1,64 @@
+@import "./variables.css";
+
+@theme {
+  --color-cal-ink: var(--cal-color-ink);
+  --color-cal-action-blue: var(--cal-color-action-blue);
+  --color-cal-white: var(--cal-color-white);
+  --color-cal-paper: var(--cal-color-paper);
+  --color-cal-graphite: var(--cal-color-graphite);
+  --color-cal-slate: var(--cal-color-slate);
+  --color-cal-stone: var(--cal-color-stone);
+  --color-cal-silver: var(--cal-color-silver);
+  --color-cal-info-banner-bg: var(--cal-color-info-banner-bg);
+  --color-cal-google-blue: var(--cal-color-google-blue);
+  --color-cal-google-yellow: var(--cal-color-google-yellow);
+  --color-cal-google-green: var(--cal-color-google-green);
+  --color-cal-google-red: var(--cal-color-google-red);
+
+  --font-cal-display: var(--cal-font-display);
+  --font-cal-ui: var(--cal-font-ui);
+  --font-cal-product: var(--cal-font-product);
+  --font-cal-utility: var(--cal-font-utility);
+
+  --tracking-cal-caption: var(--cal-tracking-caption);
+  --tracking-cal-body-sm: var(--cal-tracking-body-sm);
+  --tracking-cal-body: var(--cal-tracking-body);
+  --tracking-cal-subheading: var(--cal-tracking-subheading);
+  --tracking-cal-heading-sm: var(--cal-tracking-heading-sm);
+  --tracking-cal-heading: var(--cal-tracking-heading);
+  --tracking-cal-heading-lg: var(--cal-tracking-heading-lg);
+  --tracking-cal-display: var(--cal-tracking-display);
+
+  --spacing-cal-1: var(--cal-space-1);
+  --spacing-cal-1-25: var(--cal-space-1-25);
+  --spacing-cal-1-5: var(--cal-space-1-5);
+  --spacing-cal-2: var(--cal-space-2);
+  --spacing-cal-2-5: var(--cal-space-2-5);
+  --spacing-cal-3: var(--cal-space-3);
+  --spacing-cal-4: var(--cal-space-4);
+  --spacing-cal-5: var(--cal-space-5);
+  --spacing-cal-6: var(--cal-space-6);
+  --spacing-cal-7: var(--cal-space-7);
+  --spacing-cal-8: var(--cal-space-8);
+  --spacing-cal-10: var(--cal-space-10);
+  --spacing-cal-12: var(--cal-space-12);
+  --spacing-cal-20: var(--cal-space-20);
+
+  --radius-cal-md: var(--cal-radius-md);
+  --radius-cal-lg: var(--cal-radius-lg);
+  --radius-cal-xl: var(--cal-radius-xl);
+  --radius-cal-2xl: var(--cal-radius-2xl);
+  --radius-cal-3xl: var(--cal-radius-3xl);
+  --radius-cal-full: var(--cal-radius-full);
+  --radius-cal-full-2: var(--cal-radius-full-2);
+  --radius-cal-full-3: var(--cal-radius-full-3);
+  --radius-cal-full-4: var(--cal-radius-full-4);
+
+  --shadow-cal-sm: var(--cal-shadow-sm);
+  --shadow-cal-subtle: var(--cal-shadow-subtle);
+  --shadow-cal-sm-2: var(--cal-shadow-sm-2);
+  --shadow-cal-sm-3: var(--cal-shadow-sm-3);
+  --shadow-cal-sm-4: var(--cal-shadow-sm-4);
+  --shadow-cal-subtle-2: var(--cal-shadow-subtle-2);
+  --shadow-cal-subtle-3: var(--cal-shadow-subtle-3);
+}
