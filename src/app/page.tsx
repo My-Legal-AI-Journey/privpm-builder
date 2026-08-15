@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import type { GenerateInput, Jurisdiction, PrivPMOutput } from "@/lib/types";
 import { toMarkdown } from "@/lib/markdown";
 import { normalizeInputBrief } from "@/lib/normalize";
@@ -27,6 +27,12 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "cites", label: "引用" },
 ];
 
+const JURIS: { id: Jurisdiction; label: string }[] = [
+  { id: "CN", label: "CN" },
+  { id: "EU", label: "EU" },
+  { id: "CN+EU", label: "CN+EU" },
+];
+
 function citeHref(slug?: string): string | null {
   if (!slug) return null;
   return `/kb/${slug.split("/").map(encodeURIComponent).join("/")}`;
@@ -41,8 +47,16 @@ export default function HomePage() {
   const [tab, setTab] = useState<Tab>("clarify");
   const [copiedAll, setCopiedAll] = useState(false);
   const [copiedPrompt, setCopiedPrompt] = useState(false);
+  const briefRef = useRef<HTMLTextAreaElement>(null);
 
   const md = useMemo(() => (output ? toMarkdown(output) : ""), [output]);
+
+  function startManualInput() {
+    setBrief("");
+    setOutput(null);
+    setError(null);
+    requestAnimationFrame(() => briefRef.current?.focus());
+  }
 
   function loadSample(text: string) {
     setBrief(text);
@@ -119,38 +133,45 @@ export default function HomePage() {
       <div className="pm-grid">
         <section className="pm-card">
           <h2 className="pm-h2">输入</h2>
-          <div className="pm-brief-row">
-            <label className="pm-label pm-brief-grow">
-              原始需求
-              <textarea
-                className="pm-input pm-brief"
-                rows={12}
-                value={brief}
-                onChange={(e) => setBrief(e.target.value)}
-                placeholder="粘贴功能、目的、已知问题…"
-              />
-            </label>
-            <div className="pm-sample-col">
-              <button type="button" className="pm-chip" onClick={() => loadSample(SAMPLE_A)}>
-                样例 A
-              </button>
-              <button type="button" className="pm-chip" onClick={() => loadSample(SAMPLE_B)}>
-                样例 B
-              </button>
-            </div>
+          <div className="pm-chip-row">
+            <button type="button" className="pm-chip pm-chip-accent" onClick={startManualInput}>
+              输入
+            </button>
+            <button type="button" className="pm-chip" onClick={() => loadSample(SAMPLE_A)}>
+              样例 A
+            </button>
+            <button type="button" className="pm-chip" onClick={() => loadSample(SAMPLE_B)}>
+              样例 B
+            </button>
           </div>
           <label className="pm-label">
-            法域
-            <select
-              className="pm-input"
-              value={jurisdiction}
-              onChange={(e) => setJurisdiction(e.target.value as Jurisdiction)}
-            >
-              <option value="CN">CN</option>
-              <option value="EU">EU</option>
-              <option value="CN+EU">CN+EU</option>
-            </select>
+            原始需求
+            <textarea
+              ref={briefRef}
+              className="pm-input pm-brief"
+              rows={12}
+              value={brief}
+              onChange={(e) => setBrief(e.target.value)}
+              placeholder="粘贴功能、目的、已知问题… 或点「输入」手写"
+            />
           </label>
+          <div className="pm-label">
+            法域
+            <div className="pm-seg" role="radiogroup" aria-label="法域">
+              {JURIS.map((j) => (
+                <button
+                  key={j.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={jurisdiction === j.id}
+                  className={`pm-seg-item${jurisdiction === j.id ? " is-on" : ""}`}
+                  onClick={() => setJurisdiction(j.id)}
+                >
+                  {j.label}
+                </button>
+              ))}
+            </div>
+          </div>
           <button
             type="button"
             className="pm-btn-primary"
@@ -170,7 +191,7 @@ export default function HomePage() {
             </button>
           </div>
           {!output && (
-            <p className="pm-muted">点样例 A/B 填入左侧原文，再生成。无 API Key 时使用样例包（fixture）。</p>
+            <p className="pm-muted">点「输入」手写，或用样例 A/B 填入后再生成。无 API Key 时使用样例包。</p>
           )}
           {output && (
             <>
@@ -269,8 +290,7 @@ export default function HomePage() {
       </div>
 
       <footer className="pm-footer">
-        辅助 PM 草稿，不构成法律意见。可在{" "}
-        <Link href="/kb">知识库</Link> 对照条文与专题。
+        辅助 PM 草稿，不构成法律意见。可在 <Link href="/kb">知识库</Link> 对照条文与专题。
       </footer>
     </main>
   );

@@ -19,14 +19,19 @@ export default async function KbArticlePage({ params }: Props) {
   const hit = resolveKbFile(slug);
   if (!hit) notFound();
   const html = mdToSafeHtml(readKbMarkdown(hit.abs));
+  const section = hit.slug.split("/")[0];
 
   return (
     <main className="pm-shell">
       <header className="pm-header">
         <div>
-          <p className="pm-brand">知识库</p>
+          <p className="pm-brand">知识库 · {section}</p>
           <h1 className="pm-title">{hit.title}</h1>
-          <p className="pm-sub">{hit.slug}</p>
+          <p className="pm-sub">
+            <Link href="/kb">全部目录</Link>
+            {" · "}
+            {hit.slug}
+          </p>
         </div>
         <nav className="pm-nav">
           <Link className="pm-btn-ghost" href="/kb">
