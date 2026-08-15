@@ -54,15 +54,24 @@ export default function HomePage() {
     setLoading(true);
     setError(null);
     setCopied(false);
+    const input: GenerateInput = { feature, purpose, jurisdiction, knownIssues };
     try {
-      const res = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ feature, purpose, jurisdiction, knownIssues }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "generate_failed");
-      setOutput(data as PrivPMOutput);
+      try {
+        const res = await fetch("/api/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(input),
+        });
+        if (res.ok) {
+          setOutput((await res.json()) as PrivPMOutput);
+          setTab("clarify");
+          return;
+        }
+      } catch {
+        /* static hosting / offline → fixture */
+      }
+      const { buildFixtureOutput } = await import("@/lib/fixtures");
+      setOutput(buildFixtureOutput(input));
       setTab("clarify");
     } catch (e) {
       setError(String(e));

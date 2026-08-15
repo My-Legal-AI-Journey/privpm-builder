@@ -26,7 +26,8 @@ PrivPM 帮隐私合规 PM 用 AI 把业务/法规要求变成可评审的用户�
 - [x] Spec + agent skill 指引 + repo scaffold
 - [x] Demo 样例包（`demo/01` 推荐 · `demo/02` 出境）
 - [x] App MVP（UI + `/api/generate`；无 Key 时 fixture）
-- [ ] Public demo link + GitHub
+- [x] Public demo link + GitHub（Pages Demo + `My-Legal-AI-Journey/privpm-builder`）
+- [x] StepFun 申请文案就绪（`docs/stepfun-application.draft.md`；**【提交】仍待本人点提交）
 - [ ] StepFun application submitted
 - [x] ByteDance materials (`docs/bytedance/`) — JD + 投递包；专投简历 docx 未改
 

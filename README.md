@@ -5,15 +5,22 @@
 > 帮隐私合规 PM 把「功能 + 数据用途 + 法域」一次变成：澄清问题、风险控制点、用户故事与验收标准、Prompt 模板、阶段小结。  
 > EN: Turn feature + data purpose + jurisdiction into review-ready PM artifacts (clarifying questions, risk controls, stories/AC, prompt template, stage summary).
 
+**公开链接**
+
+| 类型 | URL |
+|------|-----|
+| Demo | https://my-legal-ai-journey.github.io/privpm-builder/ |
+| GitHub | https://github.com/My-Legal-AI-Journey/privpm-builder |
+| StepFun 申请文案 | [`docs/stepfun-application.draft.md`](docs/stepfun-application.draft.md) |
+
 ## 90 秒演示路径
 
-1. `npm install && npm run dev`
-2. 打开 http://localhost:3000
-3. 点「样例 A · 个性化推荐 Feed」→「生成五段输出」
-4. 切换 Tabs：拆解 → 风险 → 故事 → 模板 → 小结 → **引用**（知识库树路径）
-5. 「复制全部 Markdown」粘贴到笔记 / 模板库
+1. 打开 Demo 链接（或本地 `npm install && npm run dev` → http://localhost:3000）
+2. 点「样例 A · 个性化推荐 Feed」→「生成五段输出」
+3. 切换 Tabs：拆解 → 风险 → 故事 → 模板 → 小结 → **引用**（知识库树路径）
+4. 「复制全部 Markdown」粘贴到笔记 / 模板库
 
-无 `STEPFUN_API_KEY` 时自动使用仓库 [`demo/`](demo/) 样例包（fixture），仍可完整演示。
+无 `STEPFUN_API_KEY` 时自动使用仓库 [`demo/`](demo/) 样例包（fixture），仍可完整演示。公网 Demo 为静态托管，默认 fixture；本地/可挂 Key 的 Node 托管可走 StepFun API。
 
 ## 启动
 
@@ -37,6 +44,7 @@ npm run dev
 | [`demo/`](demo/) | 固化样例输入 + 引用切片清单 |
 | [`知识库/PIPL/`](知识库/PIPL/) | 条文/专题/比较（生成 grounding 资产） |
 | [`知识库/PIPL/比较/EU-要点卡.md`](知识库/PIPL/比较/EU-要点卡.md) | EU 对照短卡 |
+| [`docs/stepfun-application.draft.md`](docs/stepfun-application.draft.md) | StepFun Builder 申请表答案 |
 
 ## Agent
 
