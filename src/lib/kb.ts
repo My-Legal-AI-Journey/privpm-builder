@@ -333,12 +333,19 @@ export function mdToSafeHtml(md: string): string {
       continue;
     }
 
-    const h = /^(#{1,3})\s+(.*)$/.exec(trimmed);
+    const h = /^(#{1,5})\s+(.*)$/.exec(trimmed);
     if (h) {
       closeLang();
-      const level = h[1].length;
-      const id = h[2].replace(/\s+/g, "-").slice(0, 40);
-      out.push(`<h${level} id="${id}">${inlineHtml(h[2], index)}</h${level}>`);
+      const level = Math.min(h[1].length, 5);
+      const text = h[2];
+      let cls = "pm-kb-h";
+      if (level === 1) cls = "pm-kb-h-title";
+      else if (/^[一二三四五六七八九十百]+、/.test(text) || level === 2) cls = "pm-kb-h-yi";
+      else if (/^（[一二三四五六七八九十百]+）/.test(text) || level === 3) cls = "pm-kb-h-yiyi";
+      else if (/^\d+\./.test(text) || level === 4) cls = "pm-kb-h-num";
+      else if (/^\(\d+\)/.test(text) || level === 5) cls = "pm-kb-h-paren";
+      const id = text.replace(/\s+/g, "-").slice(0, 48);
+      out.push(`<h${level} id="${id}" class="${cls}">${inlineHtml(text, index)}</h${level}>`);
       continue;
     }
 

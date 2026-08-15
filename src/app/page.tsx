@@ -27,11 +27,13 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "cites", label: "引用" },
 ];
 
-const JURIS: { id: Jurisdiction; label: string }[] = [
-  { id: "CN", label: "CN" },
-  { id: "EU", label: "EU" },
-  { id: "CN+EU", label: "CN+EU" },
+const JURIS: { id: Jurisdiction; title: string; code: string }[] = [
+  { id: "CN", title: "中国", code: "CN" },
+  { id: "EU", title: "欧盟", code: "EU" },
+  { id: "CN+EU", title: "中欧对照", code: "CN+EU" },
 ];
+
+type InputMode = "input" | "a" | "b";
 
 function citeHref(slug?: string): string | null {
   if (!slug) return null;
@@ -39,7 +41,8 @@ function citeHref(slug?: string): string | null {
 }
 
 export default function HomePage() {
-  const [brief, setBrief] = useState(SAMPLE_A);
+  const [brief, setBrief] = useState("");
+  const [inputMode, setInputMode] = useState<InputMode>("input");
   const [jurisdiction, setJurisdiction] = useState<Jurisdiction>("CN");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -53,13 +56,15 @@ export default function HomePage() {
 
   function startManualInput() {
     setBrief("");
+    setInputMode("input");
     setOutput(null);
     setError(null);
     requestAnimationFrame(() => briefRef.current?.focus());
   }
 
-  function loadSample(text: string) {
+  function loadSample(text: string, mode: InputMode) {
     setBrief(text);
+    setInputMode(mode);
     setOutput(null);
     setError(null);
   }
@@ -134,13 +139,25 @@ export default function HomePage() {
         <section className="pm-card">
           <h2 className="pm-h2">输入</h2>
           <div className="pm-chip-row">
-            <button type="button" className="pm-chip pm-chip-accent" onClick={startManualInput}>
+            <button
+              type="button"
+              className={`pm-chip${inputMode === "input" ? " pm-chip-accent" : ""}`}
+              onClick={startManualInput}
+            >
               输入
             </button>
-            <button type="button" className="pm-chip" onClick={() => loadSample(SAMPLE_A)}>
+            <button
+              type="button"
+              className={`pm-chip${inputMode === "a" ? " pm-chip-accent" : ""}`}
+              onClick={() => loadSample(SAMPLE_A, "a")}
+            >
               样例 A
             </button>
-            <button type="button" className="pm-chip" onClick={() => loadSample(SAMPLE_B)}>
+            <button
+              type="button"
+              className={`pm-chip${inputMode === "b" ? " pm-chip-accent" : ""}`}
+              onClick={() => loadSample(SAMPLE_B, "b")}
+            >
               样例 B
             </button>
           </div>
@@ -151,23 +168,27 @@ export default function HomePage() {
               className="pm-input pm-brief"
               rows={12}
               value={brief}
-              onChange={(e) => setBrief(e.target.value)}
-              placeholder="粘贴功能、目的、已知问题… 或点「输入」手写"
+              onChange={(e) => {
+                setBrief(e.target.value);
+                setInputMode("input");
+              }}
+              placeholder="粘贴功能、目的、已知问题…"
             />
           </label>
           <div className="pm-label">
             法域
-            <div className="pm-seg" role="radiogroup" aria-label="法域">
+            <div className="pm-juris" role="radiogroup" aria-label="法域">
               {JURIS.map((j) => (
                 <button
                   key={j.id}
                   type="button"
                   role="radio"
                   aria-checked={jurisdiction === j.id}
-                  className={`pm-seg-item${jurisdiction === j.id ? " is-on" : ""}`}
+                  className={`pm-juris-card${jurisdiction === j.id ? " is-on" : ""}`}
                   onClick={() => setJurisdiction(j.id)}
                 >
-                  {j.label}
+                  <span className="pm-juris-title">{j.title}</span>
+                  <span className="pm-juris-code">{j.code}</span>
                 </button>
               ))}
             </div>
