@@ -1,0 +1,17 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+.next/
+.DS_Store
+*.log
+
+# Large binary attachments (local only; demo uses Markdown KB + fixtures)
+参考文献/**/*.pdf
+参考文献/**/*.doc
+参考文献/**/*.docx
+参考文献/**/*.rar
+参考文献/**/*.zip
+*.pdf
+*.rar

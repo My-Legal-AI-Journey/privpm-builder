@@ -1,0 +1,16 @@
+---
+description: PrivPM project always-on context — StepFun Builder + ByteDance A18352 privacy AI Builder demo
+alwaysApply: true
+---
+
+# PrivPM rule
+
+You are working in the **PrivPM** repo. Before implementing:
+
+1. Read `AGENTS.md` and `CONTEXT.md` in the repo root.
+2. Read `/Users/melendez/.cursor/skills/privpm-stepfun-builder/SKILL.md` and linked specs.
+
+**Build:** privacy-compliance **PM** workflow demo (stories, AC, prompt templates).  
+**Do not build:** resume/interview helpers, or a Vela clone.
+
+Primary model provider: **StepFun** via env keys. Keep demos runnable and interview-narratable in ≤90 seconds.
